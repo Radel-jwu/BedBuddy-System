@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NinjaController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('index');
@@ -53,11 +55,28 @@ Route::get('/dashboard/about-us', function () {
     return view('dashboard.about-us');
 })->name('dashboard.about-us');
 
+Route::get('/dashboard/subscription-plan', function () {
+    return view('dashboard.subscription-plan');
+})->name('dashboard.subscription-plan');
+
+Route::get('/dashboard/profile-settings', [ProfileController::class, 'edit'])->name('dashboard.profile-settings');
+
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/signup/store', [SignupController::class, 'store'])->name('signup.store');
     
+Route::post('/logout', function () {
+    Auth::logout();              // Logout the user
+    request()->session()->invalidate();  // Invalidate the session
+    request()->session()->regenerateToken(); // Regenerate CSRF token
+    return redirect('/login');   // Redirect to login page
+})->name('logout');
+
 
 
 Route::get('/ninjas', [NinjaController::class, 'index'])->name('ninjas.index');

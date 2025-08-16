@@ -156,7 +156,9 @@
             <div class="bg-white rounded-lg p-4 shadow-sm">
               <p class="text-blue-600 font-semibold text-xl mt-2">Price starts at:</p>
               <p class="text-sm mb-2 text-gray-600">₱ 21,317/month</p>
+              <a href = "/dashboard/subscription-plan">
               <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Book now</button>
+              </a>
             </div>
 
             <div class="bg-white border text-blue-600 rounded-lg p-4 shadow-sm">

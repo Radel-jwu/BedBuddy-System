@@ -9,7 +9,7 @@ class Signup extends Model
 {
 
     //
-    protected $fillable = ['username' , 'phone' , 'email' , 'address' , 'password'];
+    protected $fillable = ['username' , 'phone' , 'email' , 'address' , 'password', 'profile_pic'];
     /** @use HasFactory<\Database\Factories\NinjaFactory> */
     use HasFactory;
 }
