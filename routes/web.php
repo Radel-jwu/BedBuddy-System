@@ -6,6 +6,11 @@ use App\Http\Controllers\SignupController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RoommateMatchController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+
+
 
 Route::get('/', function () {
     return view('index');
@@ -27,9 +32,10 @@ Route::get('/login', function () {
     return view('login_page.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.home');
-});
+Route::get('/dashboard', [DashboardController::class, 'home'])
+    ->middleware('auth')
+    ->name('dashboard.home');
+
 
 Route::get('/dashboard/social', function () {
     return view('dashboard.social');
@@ -59,6 +65,14 @@ Route::get('/dashboard/subscription-plan', function () {
     return view('dashboard.subscription-plan');
 })->name('dashboard.subscription-plan');
 
+
+Route::get('/dashboard/roommate-preference', function () {
+    return view('dashboard.roommate-preference');
+})->name('dashboard.roommate-preference');
+
+Route::post('/roommate-preferences/save', [App\Http\Controllers\RoommatePreferenceController::class, 'save'])
+    ->name('roommate.preferences.save');
+
 Route::get('/dashboard/profile-settings', [ProfileController::class, 'edit'])->name('dashboard.profile-settings');
 
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -78,9 +92,18 @@ Route::post('/logout', function () {
 })->name('logout');
 
 
+Route::middleware('auth')->get('/roommate-matches', [RoommateMatchController::class, 'findMatches']);
+
+//roommateController
+Route::get('/roommates/{user}', [RoommateMatchController::class, 'show'])->name('roommate.show');
+
+
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/ninjas', [NinjaController::class, 'index'])->name('ninjas.index');
 Route::get('/ninjas/create', [NinjaController::class, 'create'])->name('ninjas.create');   
 Route::get('/ninjas/{ninja}' , [NinjaController::class, 'show'])->name('ninjas.show');
 Route::post('/ninjas' , [NinjaController::class, 'store'])->name('ninjas.store');
 Route::delete('/ninjas/{ninja}' , [NinjaController::class, 'destroy'])->name('ninjas.destroy');
+
+
