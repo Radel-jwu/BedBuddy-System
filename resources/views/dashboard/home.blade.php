@@ -124,36 +124,25 @@
 <section class="bg-white px-8 py-16">
   <div class="max-w-7xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-semibold text-gray-900">Look For Roommates</h2>
+      <h2 class="text-2xl font-semibold text-gray-900">Recommended Roommate</h2>
       <div class="space-x-2">
-        <button class="px-4 py-1 rounded-full bg-blue-600 text-white font-medium">Post a Preference</button>
-      
+        <a href = "roommate-preference">
+          <button class="px-4 py-1 rounded-full bg-blue-600 text-white font-medium">Find now your Roommate</button>
+        </a>
       </div>
     </div>
 
     <!-- Grid of Listings -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
-      <!-- Card (repeat this block for more listings) -->
-      <x-roommate>
-      </x-roommate>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      @forelse($matches as $match)
+          <x-roommate :user="$match" />
+      @empty
+          <div class="col-span-full text-center text-gray-500">
+              No matches yet. Try updating your roommate preferences.
+          </div>
+      @endforelse
+  </div>
 
-      <x-roommate>
-      </x-roommate>
-      
-      <x-roommate>
-      </x-roommate>
-    
-      <x-roommate>
-      </x-roommate>
-
-      <x-roommate>
-      </x-roommate>
-
-      <x-roommate>
-      </x-roommate>
-    
- 
-    </div>
       
       <!-- End card -->
       
