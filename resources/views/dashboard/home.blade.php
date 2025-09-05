@@ -90,29 +90,13 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <!-- Card (repeat this block for more listings) -->  
       <!--Listing 1-->
-      <x-listing>
-      </x-listing>
-      <!--Listing 2-->
-      <x-listing>
-      </x-listing>
-      <!--Listing 3-->
-      <x-listing>
-      </x-listing>
-      <!--Listing 4-->
-      <x-listing>
-      </x-listing>
-      <!--Listing 5-->
-      <x-listing>
-      </x-listing>
-      <!--Listing 6-->
-      <x-listing>
-      </x-listing>
-
-      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+          @foreach($listings as $listing)
+              <x-listing :listing="$listing" />
+          @endforeach
+      </div>
       <!-- End card -->
       
-      <!-- Repeat the above card as needed (6 total) -->
-      <!-- Copy/Paste 5 more identical blocks here with unique images/details if desired -->
     </div>
 
     <div class="text-right mt-6">
