@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RoommateMatchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ListingController;
 
 
 
@@ -97,7 +98,11 @@ Route::middleware('auth')->get('/roommate-matches', [RoommateMatchController::cl
 //roommateController
 Route::get('/roommates/{user}', [RoommateMatchController::class, 'show'])->name('roommate.show');
 
-
+//listingConroller
+Route::get('/dashboard', [DashboardController::class, 'home'])
+     ->middleware(['auth'])
+     ->name('dashboard.home');
+     
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/ninjas', [NinjaController::class, 'index'])->name('ninjas.index');

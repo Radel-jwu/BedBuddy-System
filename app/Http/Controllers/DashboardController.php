@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Listing;
+
 
 class DashboardController extends Controller
 {
@@ -11,6 +13,9 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $prefs = optional($user->roommatePreference);
+        
+        
+        $listings = Listing::latest()->paginate(6);
 
         // Basic match example — adapt fields to your schema
         $matches = User::with('roommate_preferences')
@@ -29,6 +34,6 @@ class DashboardController extends Controller
             ->take(12)
             ->get();
 
-        return view('dashboard.home', compact('matches'));
+        return view('dashboard.home', compact('listings', 'matches'));
     }
 }
